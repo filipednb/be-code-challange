@@ -1,17 +1,17 @@
 
 # Shipment API
 
-In order to run the API follow the steps below:
+## Instructions: 
 
-Clone this repository to your local workspace
+Clone this repository into your local workspace and run the following commands:
 
 ```
-npm install
+$ npm install
 ```
 
 ### Running DB:
 ```
-docker run --name logix-mysql -e MYSQL_ROOT_PASSWORD=pass123 -p 3306:3306 -d mysql
+$ docker run --name logix-mysql -e MYSQL_ROOT_PASSWORD=pass123 -p 3306:3306 -d mysql
 ```
 ### Create Database and Tables
 
