@@ -21,5 +21,15 @@
         "strictNullChecks": true,
         "strictPropertyInitialization": false,
         "target": "ES2018",
-    }
+        "paths": {
+            "@domain/*": ["src/domain/*"],
+            "@util/*": ["src/util/*"],
+            "@db/*": ["src/db/*"],
+            "@app/*": ["src/app/*"],
+        }
+        
+    },
+    "include": ["./src/*", "index.ts"],
+    "exclude": ["./node_modules"]
+
 }

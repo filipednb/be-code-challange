@@ -1,7 +1,7 @@
 import ShipmentController from '../../../src/domain/shipment/shipment.controller';
 
 // jest.mock('express');
-// jest.mock('./shipment.model');
+// jest.mock('../../../src/domain/shipment/shipment.model');
 // jest.mock('./shipment.service');
 // jest.mock('./shipment.mapper');
 // jest.mock("tslog");
@@ -18,7 +18,6 @@ describe('ShipmentController', () => {
   });
 
   it('should have a method intializeRoutes()', () => {
-    // instance.intializeRoutes();
-    expect(false).toBeTruthy();
+    instance.intializeRoutes();
   });
 });

@@ -1,24 +1,23 @@
-import express, { Request, Response } from 'express';
-import { OrganizationModel } from './organization.model';
-import OrganizationService  from './organization.service';
+import express, { NextFunction, Request, Response } from 'express';
+import { OrganizationModel } from '../organization/organization.model';
+import OrganizationService from '../organization/organization.service';
 import { Logger } from 'tslog';
  
 class OrganizationController {
-    private log: Logger<OrganizationController> = new Logger();
-    public pathSingular = '/organization';
-    public pathPlural = '/organizations'
-    public router = express.Router();
-    private service: OrganizationService;
+  private log: Logger<OrganizationController> = new Logger();
+  private service: OrganizationService = new OrganizationService();
+  private pathSingular = '/organization';
+  private pathPlural = '/organizations'
+  private router = express.Router();
 
-    constructor() {
-      this.service = new OrganizationService();
-      this.intializeRoutes();
-    }
+  constructor() {
+    this.intializeRoutes();
+  }
 
   public intializeRoutes() {
     this.router.get(this.pathSingular, this.getAll);
     this.router.get(`${this.pathPlural}/:id`, this.findById);
-    this.router.post(this.pathSingular, this.updateOrInsert);
+    this.router.post(this.pathSingular, this.insertOrUpdate);
   }
 
   getAll = async (_req: Request<OrganizationModel>, res: Response) => {
@@ -27,15 +26,19 @@ class OrganizationController {
     res.send(response);
   }
 
-  updateOrInsert = async (req: Request, res: Response) => {
-    this.log.info(`M=updateOrInsert, I=Update or insert organization, body=${req.body}`);
+  insertOrUpdate = async (req: Request, res: Response, next: NextFunction) => {
+    this.log.info(`M=insertOrUpdate, I=Update or insert organization, body=${req.body}`);
+
     try {
-      await this.service.updateOrInsert(req.body);
+      
+      await this.service.insertOrUpdate(req.body);
+      
       res.send();
     } catch (error) {
-      this.log.error(`M=updateOrInsert, E=Error on update or insert ` +
-        `organization, body=${req.body}, error=${error}`);
-      res.status(400).send(error); 
+      this.log.error(`M=insertOrUpdate, E=Error on update or insert ` +
+        `organization, body=${JSON.stringify(req.body)}, error=${error}`);
+      
+      next(error); 
     }
   }
 

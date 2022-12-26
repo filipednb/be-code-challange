@@ -3,3 +3,7 @@ export interface OrganizationModel {
   id: string;
   code: string;
 }
+
+export function isValid(model: OrganizationModel) {
+  return model.code && model.id && model.type;
+}

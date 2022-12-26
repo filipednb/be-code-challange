@@ -33,9 +33,10 @@ $ npm start
 
 ### Versions
 - NPM 9.2.0
-- NodeJS v18.12.1
+- NodeJS v16.14.1
 
 ### Todo:
+- Request validations
 - Implement more unit and integration tests
 - Migration
 - Docker
